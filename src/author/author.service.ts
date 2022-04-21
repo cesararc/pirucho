@@ -16,19 +16,19 @@ export class AuthorService {
     return await newAuthor.save();
   }
 
-  // findAll() {
-  //   return `This action returns all author`;
-  // }
+  async findAll(): Promise<Author[]> {
+    return await this.authorModel.find().exec();
+  }
 
-  // findOne(id: number) {
-  //   return `This action returns a #${id} author`;
-  // }
+  async findOne(id: string): Promise<Author> {
+    return await this.authorModel.findById(id).exec();
+  }
 
-  async update(id: number, author: Author): Promise<Author> {
+  async update(id: string, author: Author): Promise<Author> {
     return await this.authorModel.findByIdAndUpdate(id, author, { new: true });
   }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} author`;
-  // }
+  async remove(id: string) {
+    return await this.authorModel.findByIdAndRemove(id);
+  }
 }

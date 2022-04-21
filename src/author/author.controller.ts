@@ -1,48 +1,50 @@
 import {
   Controller,
-  // Get,
+  Get,
   Post,
   Body,
-  // Patch,
-  // Param,
-  // Delete,
+  Param,
+  Put,
+  Delete,
   Res,
   HttpStatus,
 } from '@nestjs/common';
 import { Author } from 'src/schemas/author.schema';
 import { AuthorService } from './author.service';
-// import { CreateAuthorDto } from './dto/create-author.dto';
-// import { UpdateAuthorDto } from './dto/update-author.dto';
 
 @Controller('author')
 export class AuthorController {
   constructor(private readonly authorService: AuthorService) {}
 
   @Post()
-  async create(@Res() response, @Body() author: Author) {
+  async create(@Res() res, @Body() author: Author) {
     const newAuhtor = await this.authorService.create(author);
-    return response.status(HttpStatus.CREATED).json({
+    return res.status(HttpStatus.CREATED).json({
       newAuhtor,
     });
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.authorService.findAll();
-  // }
+  @Get()
+  async findAll(@Res() res) {
+    const authors = await this.authorService.findAll();
+    return res.status(HttpStatus.OK).json({ authors });
+  }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.authorService.findOne(+id);
-  // }
+  @Get(':id')
+  async findOne(@Res() res, @Param('id') id: string) {
+    const author = await this.authorService.findOne(id);
+    return res.status(HttpStatus.OK).json({ author });
+  }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateAuthorDto: UpdateAuthorDto) {
-  //   return this.authorService.update(+id, updateAuthorDto);
-  // }
+  @Put(':id')
+  async update(@Res() res, @Param('id') id: string, @Body() author: Author) {
+    const updateAuthor = await this.authorService.update(id, author);
+    return res.status(HttpStatus.OK).json({ updateAuthor });
+  }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.authorService.remove(+id);
-  // }
+  @Delete(':id')
+  async remove(@Res() res, @Param('id') id: string) {
+    const removeBook = await this.authorService.remove(id);
+    return res.status(HttpStatus.OK).json({ removeBook });
+  }
 }
