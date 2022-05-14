@@ -1,14 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Author, AuthorDocument } from 'src/schemas/author.schema';
 import { Model } from 'mongoose';
-// import { CreateAuthorDto } from './dto/create-author.dto';
-// import { UpdateAuthorDto } from './dto/update-author.dto';
+import { Author, AuthorDocument } from './entities/author.schema';
 
 @Injectable()
 export class AuthorService {
   constructor(
-    @InjectModel(Author.name) private authorModel: Model<AuthorDocument>,
+    @InjectModel(Author.name)
+    private authorModel: Model<AuthorDocument>,
   ) {}
 
   async create(author: Author): Promise<Author> {

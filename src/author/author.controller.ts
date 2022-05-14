@@ -9,8 +9,8 @@ import {
   Res,
   HttpStatus,
 } from '@nestjs/common';
-import { Author } from 'src/schemas/author.schema';
 import { AuthorService } from './author.service';
+import { Author } from './entities/author.schema';
 
 @Controller('author')
 export class AuthorController {
@@ -27,7 +27,7 @@ export class AuthorController {
   @Get()
   async findAll(@Res() res) {
     const authors = await this.authorService.findAll();
-    return res.status(HttpStatus.OK).json({ authors });
+    return res.status(HttpStatus.OK).json(authors);
   }
 
   @Get(':id')
@@ -44,7 +44,7 @@ export class AuthorController {
 
   @Delete(':id')
   async remove(@Res() res, @Param('id') id: string) {
-    const removeBook = await this.authorService.remove(id);
-    return res.status(HttpStatus.OK).json({ removeBook });
+    const removeAuhtor = await this.authorService.remove(id);
+    return res.status(HttpStatus.OK).json({ removeAuhtor });
   }
 }

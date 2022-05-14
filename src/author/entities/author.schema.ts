@@ -5,11 +5,11 @@ export type AuthorDocument = Author & Document;
 
 @Schema()
 export class Author {
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
   @Prop()
-  age: number;
+  gender: string;
 }
 
 export const AuthorSchema = SchemaFactory.createForClass(Author);
