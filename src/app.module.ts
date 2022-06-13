@@ -15,6 +15,9 @@ import {
 } from './editorial/entities/editorial.schema';
 import { EditorialController } from './editorial/editorial.controller';
 import { EditorialService } from './editorial/editorial.service';
+import { Coupon, CouponSchema } from './coupon/entities/coupon.schemas';
+import { CouponService } from './coupon/services/coupon.service';
+import { CouponController } from './coupon/controller/coupon.controller';
 
 @Module({
   imports: [
@@ -24,6 +27,7 @@ import { EditorialService } from './editorial/editorial.service';
       { name: Author.name, schema: AuthorSchema },
       { name: Category.name, schema: CategorySchema },
       { name: Editorial.name, schema: EditorialSchema },
+      { name: Coupon.name, schema: CouponSchema },
     ]),
   ],
   controllers: [
@@ -31,7 +35,14 @@ import { EditorialService } from './editorial/editorial.service';
     AuthorController,
     CategoryController,
     EditorialController,
+    CouponController,
   ],
-  providers: [AppService, AuthorService, CategoryService, EditorialService],
+  providers: [
+    AppService,
+    AuthorService,
+    CategoryService,
+    EditorialService,
+    CouponService,
+  ],
 })
 export class AppModule {}
